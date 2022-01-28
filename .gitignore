@@ -9,7 +9,6 @@ nohup.out
 *.sql
 
 # Compiled Bytecode, precompiled output and assembly
-*.amx
 *.lst
 *.asm
 
@@ -24,6 +23,8 @@ pawn.lock
 # Server/gamemode related files
 #
 
+gamemodes/
+
 # compiled settings file
 # keep `samp.json` file on version control
 # but make sure the `rcon_password` field is set externally
@@ -31,7 +32,10 @@ pawn.lock
 server.cfg
 
 # Plugins directory
-plugins/
+plugins/*
+!plugins/sscanf.so
+!plugins/Whirlpool.so
+!plugins/mysql_static.so
 
 # Logs
 logs/
@@ -42,8 +46,6 @@ logs/
 # binaries
 *.exe
 *.dll
-*.so
-*.amx
 announce
 samp03svr
 samp-npc
