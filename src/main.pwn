@@ -15111,7 +15111,7 @@ public OnGameModeInit()
     mysql_tquery(SQL_Connection, "SELECT * FROM points", "OnQueryFinished", "ii", THREAD_LOAD_POINTS, 0);
     mysql_tquery(SQL_Connection, "SELECT * FROM turfs", "OnQueryFinished", "ii", THREAD_LOAD_TURFS, 0);
 
-    SetGameModeText("R:RP "SERVER_REVISION);
+    SetGameModeText("Z:RP "SERVER_REVISION);
     SetWeather(gWeather);
     SetNameTagDrawDistance(30.0);
     //ShowPlayerMarkers(0);
@@ -30767,17 +30767,17 @@ CMD:goldrims(playerid, params[])
 
 CMD:help(playerid, params[])
 {
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/stats, /buylevel, /b, /g, /me, /do, /(o)oc, /(s)hout, /(l)ow, /(w)hisper, /(n)ewbie.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/pay, /id, /time, /report, /upgrade, /charity, /stopmusic, /joinevent, /quitevent.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/dice, /flipcoin, /accent, /helpers, /helpme, /accept, /activity, /skill, /quitjob.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/give, /sell, /toggle, /cancelcp, /afk, /(ad)vertise, /buy, /refuel, /call, /sms.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/clothing, /locate, /frisk, /contract, /number, /boombox, /switchspeedo, /stuck.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/shakehand, /dropgun, /grabgun, /usecookies, /usecigar, /usedrug, /showid.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/(inv)entory, /guninv, /loadammo, /drop, /eject, /dicebet, /gangs, /factions.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/calculate, /serverstats, /turfs, /lands, /changename, /watch, /gps, /fixvw.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/resetupgrades, /myupgrades.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/househelp, /garagehelp, /bizhelp, /jobhelp, /animhelp, /vehiclehelp, /viphelp.");
-    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[R:RP Commands] {C8C8C8}/bankhelp, /factionhelp, /ganghelp, /landhelp, /helperhelp.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/stats, /buylevel, /b, /g, /me, /do, /(o)oc, /(s)hout, /(l)ow, /(w)hisper, /(n)ewbie.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/pay, /id, /time, /report, /upgrade, /charity, /stopmusic, /joinevent, /quitevent.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/dice, /flipcoin, /accent, /helpers, /helpme, /accept, /activity, /skill, /quitjob.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/give, /sell, /toggle, /cancelcp, /afk, /(ad)vertise, /buy, /refuel, /call, /sms.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/clothing, /locate, /frisk, /contract, /number, /boombox, /switchspeedo, /stuck.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/shakehand, /dropgun, /grabgun, /usecookies, /usecigar, /usedrug, /showid.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/(inv)entory, /guninv, /loadammo, /drop, /eject, /dicebet, /gangs, /factions.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/calculate, /serverstats, /turfs, /lands, /changename, /watch, /gps, /fixvw.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/resetupgrades, /myupgrades.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/househelp, /garagehelp, /bizhelp, /jobhelp, /animhelp, /vehiclehelp, /viphelp.");
+    SendClientMessage(playerid, COLOR_LIMITLESSBLUE, "[Z:RP Commands] {C8C8C8}/bankhelp, /factionhelp, /ganghelp, /landhelp, /helperhelp.");
     return 1;
 }
 
