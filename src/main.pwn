@@ -1,6 +1,6 @@
 // ---------------------------------------
-//  Rage Roleplay (Edited)
-// Copyright (c) Limitless Roleplay
+//  Zuland (Edited)
+// Copyright (c) Limitless
 
 
 // ---------------------------------------
@@ -135,8 +135,8 @@
 #define SERVER_REVISION  "v1.0(c)" // Change this every commit.
 #define SERVER_ANTICHEAT "[BOT]Kirito"
 
-#define SERVER_MUSIC_URL "music.ragerp.org"
-#define SERVER_FETCH_URL "music.ragerp.org"
+#define SERVER_MUSIC_URL "music.zuland.org"
+#define SERVER_FETCH_URL "music.zuland.org"
 // ---------------------------------------
 #undef SSCANF_Join
 #undef SSCANF_Leave
@@ -1247,8 +1247,6 @@ new taxiVehicles[4];
 new testVehicles[5];
 new Text:Textdraw0;
 new Text:Textdraw1;
-new Text:Textdraw2;
-new Text:Textdraw3;
 new Text:Textdraw4;
 new Text:Textdraw5;
 
@@ -5572,7 +5570,7 @@ DisplayStats(playerid, targetid = INVALID_PLAYER_ID)
         GetPlayerArmour(playerid, armor);
     }
 
-    SendClientMessageEx(targetid, COLOR_GREEN, "|____ %s's statistics on Rage Roleplay [%s] ____|", name, GetDate());
+    SendClientMessageEx(targetid, COLOR_GREEN, "|____ %s's statistics on Zuland [%s] ____|", name, GetDate());
     SendClientMessageEx(targetid, COLOR_WHITE, "Level: %i - Gender: %s - Age: %i - Cash: $%i - Bank: $%i - Hours: %i - Ph: %i", PlayerInfo[playerid][pLevel], gender, PlayerInfo[playerid][pAge], PlayerInfo[playerid][pCash], PlayerInfo[playerid][pBank], PlayerInfo[playerid][pHours], PlayerInfo[playerid][pPhone]);
     SendClientMessageEx(targetid, COLOR_LIMITLESSBLUE, "Total Wealth: $%i - Experience: %i/%i - Next Level: $%i - Upgrade Points: %i", PlayerInfo[playerid][pCash] + PlayerInfo[playerid][pBank], PlayerInfo[playerid][pEXP], (PlayerInfo[playerid][pLevel] * 4), (PlayerInfo[playerid][pLevel] + 1) * 5000, PlayerInfo[playerid][pUpgradePoints]);
     SendClientMessageEx(targetid, COLOR_WHITE, "Inventory Upgrade: %i/5 - Addict Upgrade: %i/3 - Trader Upgrade: %i/3 - Asset Upgrade: %i/4", PlayerInfo[playerid][pInventoryUpgrade], PlayerInfo[playerid][pAddictUpgrade], PlayerInfo[playerid][pTraderUpgrade], PlayerInfo[playerid][pAssetUpgrade]);
@@ -5602,18 +5600,16 @@ ShowDialogToPlayer(playerid, dialogid)
     {
         case DIALOG_REGISTER:
         {
-            format(string, sizeof(string), "{F7A763}Welcome to Rage Roleplay, %s.\n{FF6347}Please enter your password of choice below in order to register:", GetPlayerNameEx(playerid));
-            ShowPlayerDialog(playerid, DIALOG_REGISTER, DIALOG_STYLE_PASSWORD, "{FFFF00}Rage Roleplay | Register", string, "Register", "Quit");
+            format(string, sizeof(string), "{F7A763}Welcome to Zuland, %s.\n{FF6347}Please enter your password of choice below in order to register:", GetPlayerNameEx(playerid));
+            ShowPlayerDialog(playerid, DIALOG_REGISTER, DIALOG_STYLE_PASSWORD, "{FFFF00}Zuland | Register", string, "Register", "Quit");
             PlayerInfo[playerid][pLevel] = 1;
         }
         case DIALOG_LOGIN:
         {
-            format(string, sizeof(string), "{F7A763}Welcome back to Rage Roleplay, %s.\n{33CC33}Please enter your password below in order to authenticate:", GetPlayerNameEx(playerid));
-            ShowPlayerDialog(playerid, DIALOG_LOGIN, DIALOG_STYLE_PASSWORD, "{FFFF00}Rage Roleplay | Login", string, "Login", "Quit");
+            format(string, sizeof(string), "{F7A763}Welcome back to Zuland, %s.\n{33CC33}Please enter your password below in order to authenticate:", GetPlayerNameEx(playerid));
+            ShowPlayerDialog(playerid, DIALOG_LOGIN, DIALOG_STYLE_PASSWORD, "{FFFF00}Zuland | Login", string, "Login", "Quit");
             TextDrawShowForPlayer(playerid, Textdraw0);
             TextDrawShowForPlayer(playerid, Textdraw1);
-            TextDrawShowForPlayer(playerid, Textdraw2);
-            TextDrawShowForPlayer(playerid, Textdraw3);
         }
         case DIALOG_GENDER:
         {
@@ -10477,7 +10473,7 @@ public TutorialTimer(playerid, stage)
                 mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET setup = 0, gender = %i, age = %i, skin = %i WHERE uid = %i", PlayerInfo[playerid][pGender], PlayerInfo[playerid][pAge], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pID]);
                 mysql_tquery(SQL_Connection, SQL_Buffer);
 
-                SendClientMessage(playerid, COLOR_AQUA, "Welcome to Rage Roleplay. Make sure to visit ragerp.org for news and updates.");
+                SendClientMessage(playerid, COLOR_AQUA, "Welcome to Zuland. Make sure to visit zuland.org for news and updates.");
                 SendClientMessage(playerid, COLOR_AQUA, "Use the /locate command to point to locations of jobs, businesses, and common places.");
                 
                 //SendClientMessage(playerid, COLOR_AQUA, "The DMV has been marked on your map. Navigate to the marker to begin your drivers test.");
@@ -11275,7 +11271,7 @@ public MinuteTimer()
 
     if(gHour != hour)
     {
-        SendClientMessageToAllEx(COLOR_WHITE, "Rage Roleplay: The time is now {AFAFAF}%02d:00{FFFFFF}.", hour);
+        SendClientMessageToAllEx(COLOR_WHITE, "Zuland: The time is now {AFAFAF}%02d:00{FFFFFF}.", hour);
 
         foreach(new i : Player)
         {
@@ -11567,7 +11563,7 @@ public MinuteTimer()
                 
                 if(ReportInfo[i][rTime] <= 0)
                 {
-                    SendClientMessage(ReportInfo[i][rReporter], COLOR_GREY, "Your report has expired. You can make an admin request on ragerp.org if you still need help.");
+                    SendClientMessage(ReportInfo[i][rReporter], COLOR_GREY, "Your report has expired. You can make an admin request on zuland.org if you still need help.");
                     ReportInfo[i][rExists] = 0;
                 }
             }
@@ -11701,7 +11697,7 @@ public ShowMainMenuCamera(playerid)
         TextDrawShowForPlayer(playerid, LoginScreen[i]);
     }
 
-    PlayAudioStreamForPlayer(playerid, "http://music.ragerp.org/blow.mp3"); // josh
+    PlayAudioStreamForPlayer(playerid, "http://music.zuland.org/blow.mp3"); // josh
     //InterpolateCameraPos(playerid, 2090.500732, -1730.270385, 122.216575, 873.889953, -1519.312011, 123.752815, 60000);
     //InterpolateCameraLookAt(playerid, 2090.014404, -1730.264892, 122.177040, 873.899353, -1518.828613, 123.698936, 60000);
     
@@ -13497,7 +13493,7 @@ public OnQueryFinished(threadid, extraid)
                 if(cache_get_field_content_int(0, "permanent"))
                     SendClientMessageEx(extraid, COLOR_YELLOW, "You are permanently banned from this server.");
                 else
-                    SendClientMessageEx(extraid, COLOR_YELLOW, "You are banned from this server. You can appeal your ban at www.ragerp.org.");
+                    SendClientMessageEx(extraid, COLOR_YELLOW, "You are banned from this server. You can appeal your ban at www.zuland.org.");
 
                 SendClientMessageEx(extraid, COLOR_LIGHTRED, "Admin: %s", bannedby);
                 SendClientMessageEx(extraid, COLOR_LIGHTRED, "Date: %s", date);
@@ -13859,15 +13855,15 @@ public OnQueryFinished(threadid, extraid)
                         GameTextForPlayer(extraid, string, 5000, 1);
 
                         if(PlayerInfo[extraid][pAdmin] > 0) {
-                            SendClientMessageEx(extraid, COLOR_WHITE, "Rage Roleplay: You have logged in as a {FF6347}level %i %s{FFFFFF}.", PlayerInfo[extraid][pAdmin], GetAdminRank(extraid));
+                            SendClientMessageEx(extraid, COLOR_WHITE, "Zuland: You have logged in as a {FF6347}level %i %s{FFFFFF}.", PlayerInfo[extraid][pAdmin], GetAdminRank(extraid));
                         } else if(PlayerInfo[extraid][pHelper] > 0) {
-                            SendClientMessageEx(extraid, COLOR_WHITE, "Rage Roleplay: You have logged in as a {33CCFF}%s{FFFFFF}.", GetHelperRank(extraid));
+                            SendClientMessageEx(extraid, COLOR_WHITE, "Zuland: You have logged in as a {33CCFF}%s{FFFFFF}.", GetHelperRank(extraid));
                         } else if(PlayerInfo[extraid][pVIPPackage] > 0) {
-                            SendClientMessageEx(extraid, COLOR_WHITE, "Rage Roleplay: You have logged in as a {A028AD}%s VIP{FFFFFF}.", GetVIPRank(PlayerInfo[extraid][pVIPPackage]));
+                            SendClientMessageEx(extraid, COLOR_WHITE, "Zuland: You have logged in as a {A028AD}%s VIP{FFFFFF}.", GetVIPRank(PlayerInfo[extraid][pVIPPackage]));
                         } else if(PlayerInfo[extraid][pLevel] >= 2) {
-                            SendClientMessageEx(extraid, COLOR_WHITE, "Rage Roleplay: You have logged in as a {AFAFAF}level %i player{FFFFFF}.", PlayerInfo[extraid][pLevel]);
+                            SendClientMessageEx(extraid, COLOR_WHITE, "Zuland: You have logged in as a {AFAFAF}level %i player{FFFFFF}.", PlayerInfo[extraid][pLevel]);
                         } else {
-                            SendClientMessage(extraid, COLOR_WHITE, "Rage Roleplay: You have logged in as a {AFAFAF}level 1 newbie{FFFFFF}.");
+                            SendClientMessage(extraid, COLOR_WHITE, "Zuland: You have logged in as a {AFAFAF}level 1 newbie{FFFFFF}.");
                         }
 
                     //	format(string, sizeof(string), "Your last login was on the %s (Server Time)", date);
@@ -15212,26 +15208,6 @@ public OnGameModeInit()
     TextDrawSetOutline(Textdraw1, 0);
     TextDrawFont(Textdraw1, 0);
 
-    Textdraw2 = TextDrawCreate(243.631042, 46.083328, "Rage");
-    TextDrawLetterSize(Textdraw2, 0.598520, 3.478334);
-    TextDrawAlignment(Textdraw2, 1);
-    TextDrawColor(Textdraw2, -2147483393);
-    TextDrawSetShadow(Textdraw2, -2);
-    TextDrawSetOutline(Textdraw2, 0);
-    TextDrawBackgroundColor(Textdraw2, -1378294017);
-    TextDrawFont(Textdraw2, 3);
-    TextDrawSetProportional(Textdraw2, 1);
-
-    Textdraw3 = TextDrawCreate(302.664642, 46.083332, "Roleplay");
-    TextDrawLetterSize(Textdraw3, 0.595240, 3.449167);
-    TextDrawAlignment(Textdraw3, 1);
-    TextDrawColor(Textdraw3, -16776961);
-    TextDrawSetShadow(Textdraw3, -1);
-    TextDrawSetOutline(Textdraw3, 0);
-    TextDrawBackgroundColor(Textdraw3, -1378294017);
-    TextDrawFont(Textdraw3, 3);
-    TextDrawSetProportional(Textdraw3, 1);
-
     Textdraw4 = TextDrawCreate(0.000000, 107.916671, "LD_SPAC:white");
     TextDrawLetterSize(Textdraw4, 0.000000, 0.000000);
     TextDrawTextSize(Textdraw4, 640.000000, 12.833328);
@@ -15336,7 +15312,7 @@ public OnGameModeInit()
     TextDrawSetProportional(LoginScreen[3], 1);
 
     // Website textdraw
-    WebsiteTD = TextDrawCreate(501.000000, 6.000000, "www.ragerp.org");
+    WebsiteTD = TextDrawCreate(501.000000, 6.000000, "www.zuland.org");
     TextDrawBackgroundColor(WebsiteTD, 255);
     TextDrawAlignment(WebsiteTD, 1);
     TextDrawFont(WebsiteTD, 0);
@@ -19980,7 +19956,7 @@ public OnGameModeInit()
     ResetRobbery();
 
     print("----------------------------------------------");
-    print("Rage Roleplay by Janpatrick and Noriel Oledan");
+    print("Zuland by Janpatrick and Noriel Oledan");
     print("Loaded successfully.");
     print("----------------------------------------------");
 
@@ -20226,7 +20202,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 20 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 20 ], 0);
 
-    LoginTD[ playerid ][ 21 ] = CreatePlayerTextDraw(playerid,316.000000, 343.000000, "~w~Website~r~- www.ragerp.org");
+    LoginTD[ playerid ][ 21 ] = CreatePlayerTextDraw(playerid,316.000000, 343.000000, "~w~Website~r~- www.zuland.org");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 21 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 21 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 21 ], 2);
@@ -20237,7 +20213,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 21 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 21 ], 0);
 
-    LoginTD[ playerid ][ 22 ] = CreatePlayerTextDraw(playerid,316.000000, 353.000000, "~w~Teamspeak:~r~- ts.ragerp.org");
+    LoginTD[ playerid ][ 22 ] = CreatePlayerTextDraw(playerid,316.000000, 353.000000, "~w~Teamspeak:~r~- ts.zuland.org");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 22 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 22 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 22 ], 2);
@@ -20281,7 +20257,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 25 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 25 ], 0);
 
-    LoginTD[ playerid ][ 26 ] = CreatePlayerTextDraw(playerid,316.000000, 433.000000, "				ragerp.org					");
+    LoginTD[ playerid ][ 26 ] = CreatePlayerTextDraw(playerid,316.000000, 433.000000, "				zuland.org					");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 26 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 26 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 26 ], 2);
@@ -21150,8 +21126,6 @@ public OnPlayerSpawn(playerid)
     }
     TextDrawHideForPlayer(playerid, Textdraw0);
     TextDrawHideForPlayer(playerid, Textdraw1);
-    TextDrawHideForPlayer(playerid, Textdraw2);
-    TextDrawHideForPlayer(playerid, Textdraw3);
     TextDrawHideForPlayer(playerid, Textdraw4);
     TextDrawHideForPlayer(playerid, Textdraw5);
     if(PlayerInfo[playerid][pKicked]) return 0;
@@ -23445,7 +23419,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
 
                 WP_Hash(PlayerInfo[playerid][pPassword], 129, inputtext);
-                ShowPlayerDialog(playerid, DIALOG_CONFIRMPASS, DIALOG_STYLE_PASSWORD, "Rage Roleplay - Confirm Pass", "Please repeat your account password for verification:", "Submit", "Back");
+                ShowPlayerDialog(playerid, DIALOG_CONFIRMPASS, DIALOG_STYLE_PASSWORD, "Zuland - Confirm Pass", "Please repeat your account password for verification:", "Submit", "Back");
             }
             else
             {
@@ -23461,7 +23435,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
                 if(isnull(inputtext))
                 {
-                    return ShowPlayerDialog(playerid, DIALOG_CONFIRMPASS, DIALOG_STYLE_PASSWORD, "Rage Roleplay - Confirm Pass", "Please repeat your account password for verification:", "Submit", "Back");
+                    return ShowPlayerDialog(playerid, DIALOG_CONFIRMPASS, DIALOG_STYLE_PASSWORD, "Zuland - Confirm Pass", "Please repeat your account password for verification:", "Submit", "Back");
                 }
 
                 WP_Hash(password, sizeof(password), inputtext);
@@ -33254,7 +33228,7 @@ CMD:nro(playerid, params[])
 
     SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has trashed report %i from %s as their report involves a non-rulebreaking offense.", GetPlayerRPName(playerid), reportid, GetPlayerRPName(ReportInfo[reportid][rReporter]));
     SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "%s has trashed your report as it involves a non-rulebreaking offense", GetPlayerRPName(playerid));
-    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our rules page at ragerp.org for a full list of rulebreaking offenses.");
+    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our rules page at zuland.org for a full list of rulebreaking offenses.");
     ReportInfo[reportid][rExists] = 0;
     return 1;
 }
@@ -33342,7 +33316,7 @@ CMD:post(playerid, params[])
 
     SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has trashed report %i from %s as it needs to be handled on the forums.", GetPlayerRPName(playerid), reportid, GetPlayerRPName(ReportInfo[reportid][rReporter]));
     SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "%s has trashed your report as your issue at hand must be handled on our forums.", GetPlayerRPName(playerid));
-    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our website at ragerp.org in order to to resolve this issue.");
+    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our website at zuland.org in order to to resolve this issue.");
     ReportInfo[reportid][rExists] = 0;
     return 1;
 }
@@ -55660,7 +55634,7 @@ CMD:serverstats(playerid, params[])
     for(new i = 0; i < MAX_GANGS; i ++) 	 if(GangInfo[i][gSetup]) 		gangs++;
     for(new i = 0; i < MAX_FACTIONS; i ++) 	 if(FactionInfo[i][fType]) 		factions++;
 
-    SendClientMessage(playerid, COLOR_GREEN, "|_____ Rage Roleplay Stats _____|");
+    SendClientMessage(playerid, COLOR_GREEN, "|_____ Zuland Stats _____|");
     SendClientMessageEx(playerid, COLOR_GREY2, "Connections: %i - Registered: %i - Kill Counter: %i - Death Counter: %i - Hours Played: %i", gConnections, gTotalRegistered, gTotalKills, gTotalDeaths, gTotalHours);
     SendClientMessageEx(playerid, COLOR_GREY2, "Houses: %i/%i - Businesses: %i/%i - Garages: %i/%i - Lands: %i/%i - Vehicles: %i/%i", houses, MAX_HOUSES, businesses, MAX_BUSINESSES, garages, MAX_GARAGES, lands, MAX_LANDS, vehicles, MAX_VEHICLES);
     SendClientMessageEx(playerid, COLOR_GREY2, "Entrances: %i/%i - Turfs: %i/%i - Points: %i/%i - Gangs: %i/%i - Factions: %i/%i", entrances, MAX_ENTRANCES, turfs, MAX_TURFS, points, MAX_POINTS, gangs, MAX_GANGS, factions, MAX_FACTIONS);
@@ -55899,8 +55873,8 @@ CMD:info(playerid, params[])
 CMD:information(playerid, params[])
 {
     SendClientMessage(playerid, COLOR_GREEN, "|____ Server Information ____|");
-    SendClientMessage(playerid, COLOR_GREY2, "Website: www.ragerp.org | Store: www.ragerp.org/store");
-    SendClientMessage(playerid, COLOR_GREY2, "Teamspeak: ts.ragerp.org");
+    SendClientMessage(playerid, COLOR_GREY2, "Website: www.zuland.org | Store: www.zuland.org/store");
+    SendClientMessage(playerid, COLOR_GREY2, "Teamspeak: ts.zuland.org");
     SendClientMessage(playerid, COLOR_GREY2, "Developer: Jimmy Esto | Kervin Yap | Janpatrick Bejare");
     SendClientMessage(playerid, COLOR_GREY2, "Server Owner: Kirigaya Kazuto");
     return 1;
