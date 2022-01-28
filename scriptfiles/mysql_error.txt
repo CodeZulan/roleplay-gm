@@ -1,0 +1,12 @@
+[2022-01-26 22:01]
+Error ID: 1054
+Callback: 
+Query: UPDATE users SET toggleradio = 0, togglemusic = 0, togglefaction = 0, togglenews = 0, toggleglobal = 1, togglecam = 0, togglehud = 1, weedtime = 0, weedgrams = 0, showturfs = 0, showlands = 0, watchon = 0, gpson = 0, couriercooldown = 0, pizzacooldown = 0, detectivecooldown = 0, duty = 0, bandana = 0 WHERE uid = 629
+Error: Unknown column 'detectivecooldown' in 'field list'
+
+[2022-01-28 22:16]
+Error ID: 1054
+Callback: 
+Query: UPDATE users SET toggleradio = 0, togglemusic = 0, togglefaction = 0, togglenews = 0, toggleglobal = 1, togglecam = 0, togglehud = 1, weedtime = 0, weedgrams = 0, showturfs = 0, showlands = 0, watchon = 0, gpson = 0, couriercooldown = 0, pizzacooldown = 0, detectivecooldown = 0, duty = 0, bandana = 0 WHERE uid = 629
+Error: Unknown column 'detectivecooldown' in 'field list'
+
