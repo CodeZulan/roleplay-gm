@@ -135,8 +135,8 @@
 #define SERVER_REVISION  "v1.0(c)" // Change this every commit.
 #define SERVER_ANTICHEAT "[BOT]Kirito"
 
-#define SERVER_MUSIC_URL "music.zuland.org"
-#define SERVER_FETCH_URL "music.zuland.org"
+#define SERVER_MUSIC_URL "music.zuland.xyz"
+#define SERVER_FETCH_URL "music.zuland.xyz"
 // ---------------------------------------
 #undef SSCANF_Join
 #undef SSCANF_Leave
@@ -10473,7 +10473,7 @@ public TutorialTimer(playerid, stage)
                 mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET setup = 0, gender = %i, age = %i, skin = %i WHERE uid = %i", PlayerInfo[playerid][pGender], PlayerInfo[playerid][pAge], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pID]);
                 mysql_tquery(SQL_Connection, SQL_Buffer);
 
-                SendClientMessage(playerid, COLOR_AQUA, "Welcome to Zuland. Make sure to visit zuland.org for news and updates.");
+                SendClientMessage(playerid, COLOR_AQUA, "Welcome to Zuland. Make sure to visit zuland.xyz for news and updates.");
                 SendClientMessage(playerid, COLOR_AQUA, "Use the /locate command to point to locations of jobs, businesses, and common places.");
                 
                 //SendClientMessage(playerid, COLOR_AQUA, "The DMV has been marked on your map. Navigate to the marker to begin your drivers test.");
@@ -11563,7 +11563,7 @@ public MinuteTimer()
                 
                 if(ReportInfo[i][rTime] <= 0)
                 {
-                    SendClientMessage(ReportInfo[i][rReporter], COLOR_GREY, "Your report has expired. You can make an admin request on zuland.org if you still need help.");
+                    SendClientMessage(ReportInfo[i][rReporter], COLOR_GREY, "Your report has expired. You can make an admin request on zuland.xyz if you still need help.");
                     ReportInfo[i][rExists] = 0;
                 }
             }
@@ -11697,7 +11697,7 @@ public ShowMainMenuCamera(playerid)
         TextDrawShowForPlayer(playerid, LoginScreen[i]);
     }
 
-    PlayAudioStreamForPlayer(playerid, "http://music.zuland.org/blow.mp3"); // josh
+    PlayAudioStreamForPlayer(playerid, "http://music.zuland.xyz/blow.mp3"); // josh
     //InterpolateCameraPos(playerid, 2090.500732, -1730.270385, 122.216575, 873.889953, -1519.312011, 123.752815, 60000);
     //InterpolateCameraLookAt(playerid, 2090.014404, -1730.264892, 122.177040, 873.899353, -1518.828613, 123.698936, 60000);
     
@@ -13493,7 +13493,7 @@ public OnQueryFinished(threadid, extraid)
                 if(cache_get_field_content_int(0, "permanent"))
                     SendClientMessageEx(extraid, COLOR_YELLOW, "You are permanently banned from this server.");
                 else
-                    SendClientMessageEx(extraid, COLOR_YELLOW, "You are banned from this server. You can appeal your ban at www.zuland.org.");
+                    SendClientMessageEx(extraid, COLOR_YELLOW, "You are banned from this server. You can appeal your ban at www.zuland.xyz.");
 
                 SendClientMessageEx(extraid, COLOR_LIGHTRED, "Admin: %s", bannedby);
                 SendClientMessageEx(extraid, COLOR_LIGHTRED, "Date: %s", date);
@@ -15312,7 +15312,7 @@ public OnGameModeInit()
     TextDrawSetProportional(LoginScreen[3], 1);
 
     // Website textdraw
-    WebsiteTD = TextDrawCreate(501.000000, 6.000000, "www.zuland.org");
+    WebsiteTD = TextDrawCreate(501.000000, 6.000000, "www.zuland.xyz");
     TextDrawBackgroundColor(WebsiteTD, 255);
     TextDrawAlignment(WebsiteTD, 1);
     TextDrawFont(WebsiteTD, 0);
@@ -20202,7 +20202,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 20 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 20 ], 0);
 
-    LoginTD[ playerid ][ 21 ] = CreatePlayerTextDraw(playerid,316.000000, 343.000000, "~w~Website~r~- www.zuland.org");
+    LoginTD[ playerid ][ 21 ] = CreatePlayerTextDraw(playerid,316.000000, 343.000000, "~w~Website~r~- www.zuland.xyz");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 21 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 21 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 21 ], 2);
@@ -20213,7 +20213,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 21 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 21 ], 0);
 
-    LoginTD[ playerid ][ 22 ] = CreatePlayerTextDraw(playerid,316.000000, 353.000000, "~w~Teamspeak:~r~- ts.zuland.org");
+    LoginTD[ playerid ][ 22 ] = CreatePlayerTextDraw(playerid,316.000000, 353.000000, "~w~Teamspeak:~r~- ts.zuland.xyz");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 22 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 22 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 22 ], 2);
@@ -20257,7 +20257,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 25 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 25 ], 0);
 
-    LoginTD[ playerid ][ 26 ] = CreatePlayerTextDraw(playerid,316.000000, 433.000000, "				zuland.org					");
+    LoginTD[ playerid ][ 26 ] = CreatePlayerTextDraw(playerid,316.000000, 433.000000, "				zuland.xyz					");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 26 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 26 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 26 ], 2);
@@ -33228,7 +33228,7 @@ CMD:nro(playerid, params[])
 
     SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has trashed report %i from %s as their report involves a non-rulebreaking offense.", GetPlayerRPName(playerid), reportid, GetPlayerRPName(ReportInfo[reportid][rReporter]));
     SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "%s has trashed your report as it involves a non-rulebreaking offense", GetPlayerRPName(playerid));
-    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our rules page at zuland.org for a full list of rulebreaking offenses.");
+    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our rules page at zuland.xyz for a full list of rulebreaking offenses.");
     ReportInfo[reportid][rExists] = 0;
     return 1;
 }
@@ -33316,7 +33316,7 @@ CMD:post(playerid, params[])
 
     SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has trashed report %i from %s as it needs to be handled on the forums.", GetPlayerRPName(playerid), reportid, GetPlayerRPName(ReportInfo[reportid][rReporter]));
     SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "%s has trashed your report as your issue at hand must be handled on our forums.", GetPlayerRPName(playerid));
-    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our website at zuland.org in order to to resolve this issue.");
+    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our website at zuland.xyz in order to to resolve this issue.");
     ReportInfo[reportid][rExists] = 0;
     return 1;
 }
@@ -55873,8 +55873,8 @@ CMD:info(playerid, params[])
 CMD:information(playerid, params[])
 {
     SendClientMessage(playerid, COLOR_GREEN, "|____ Server Information ____|");
-    SendClientMessage(playerid, COLOR_GREY2, "Website: www.zuland.org | Store: www.zuland.org/store");
-    SendClientMessage(playerid, COLOR_GREY2, "Teamspeak: ts.zuland.org");
+    SendClientMessage(playerid, COLOR_GREY2, "Website: www.zuland.xyz | Store: www.zuland.xyz/store");
+    SendClientMessage(playerid, COLOR_GREY2, "Teamspeak: ts.zuland.xyz");
     SendClientMessage(playerid, COLOR_GREY2, "Developer: Jimmy Esto | Kervin Yap | Janpatrick Bejare");
     SendClientMessage(playerid, COLOR_GREY2, "Server Owner: Kirigaya Kazuto");
     return 1;
