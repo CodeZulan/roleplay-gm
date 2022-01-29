@@ -1,8 +1,6 @@
 // ---------------------------------------
 //  Zuland (Edited)
 // Copyright (c) Limitless
-
-
 // ---------------------------------------
 #include <a_samp>
 // #include <a_http>
@@ -57,7 +55,7 @@
 #define MAX_ENTRANCES               500
 #define MAX_PLAYER_CLOTHING         10
 #define MAX_SPAWNED_VEHICLES        3
-#define MAX_ANTICHEAT_WARNINGS      5
+#define MAX_ANTICHEAT_WARNINGS      3
 #define MAX_FACTIONS                10
 #define MAX_FACTION_RANKS           20
 #define MAX_FACTION_SKINS           10
@@ -133,7 +131,7 @@
 #define percent(%0,%1)  floatround((float((%0)) / 100) * (%1))
 // ---------------------------------------
 #define SERVER_REVISION  "v1.0(c)" // Change this every commit.
-#define SERVER_ANTICHEAT "[BOT]Kirito"
+#define SERVER_ANTICHEAT "[Anti-Cheat] Zulie"
 
 #define SERVER_MUSIC_URL "music.zuland.xyz"
 #define SERVER_FETCH_URL "music.zuland.xyz"
@@ -3749,6 +3747,8 @@ new const zoneArray[][zoneEnum] =
 native WP_Hash(buffer[], len, const str[]);
 
 // ---------------------------------------
+
+#include "global/newb.pwn"
 
 main(){}
 
@@ -7485,44 +7485,6 @@ SetPlayerSpecialTag(playerid, type)
     }
 
     PlayerInfo[playerid][pTagType] = type;
-}
-
-SendNewbieChatMessage(playerid, text[])
-{
-    new string[64];
-    
-    if(PlayerInfo[playerid][pAdmin] > 1) {
-        format(string, sizeof(string), "{FF6347}%s{7DAEFF} %s", GetColorARank(playerid), GetPlayerRPName(playerid));
-    } else if(PlayerInfo[playerid][pHelper] > 0) {
-        format(string, sizeof(string), "%s %s", GetHelperRank(playerid), GetPlayerRPName(playerid));
-    } else if(PlayerInfo[playerid][pVIPPackage] > 0) {
-        format(string, sizeof(string), "{A028AD}%s VIP{7DAEFF} %s", GetVIPRank(PlayerInfo[playerid][pVIPPackage]), GetPlayerRPName(playerid));
-    } else if(PlayerInfo[playerid][pLevel] > 1) {
-        format(string, sizeof(string), "Player %s[%i]", GetPlayerRPName(playerid), playerid);
-    } else {
-        format(string, sizeof(string), "Newbie %s[%i]", GetPlayerRPName(playerid), playerid);
-    }
-
-    foreach(new i : Player)
-    {
-        if(!PlayerInfo[i][pToggleNewbie])
-        {
-            if(strlen(text) > MAX_SPLIT_LENGTH)
-            {
-                SendClientMessageEx(i, COLOR_NEWBIE, "** %s: %.*s...", string, MAX_SPLIT_LENGTH, text);
-                SendClientMessageEx(i, COLOR_NEWBIE, "** %s: ...%s", string, text[MAX_SPLIT_LENGTH]);
-            }
-            else
-            {
-                SendClientMessageEx(i, COLOR_NEWBIE, "** %s: %s", string, text);
-            }
-        }
-    }
-
-    if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] == 0)
-    {
-        PlayerInfo[playerid][pLastNewbie] = gettime();
-    }
 }
 
 SellWeapon(playerid, targetid, weaponid, price = 0)
@@ -30332,169 +30294,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 // ---------------------------------------
 
-
-
-CMD:b(playerid, params[])
-{
-    new
-        string[144];
-
-    if(isnull(params))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /b [local OOC]");
-    }
-
-    format(string, sizeof(string), "%s: (( %s ))", GetPlayerRPName(playerid), params);
-    SendProximityFadeMessage(playerid, 20.0, string, COLOR_GREY1, COLOR_GREY2, COLOR_GREY3, COLOR_GREY4, COLOR_GREY5);
-    return 1;
-}
-
-CMD:s(playerid, params[])
-{
-    return cmd_shout(playerid, params);
-}
-
-CMD:shout(playerid, params[])
-{
-    new
-        string[144];
-
-    if(isnull(params))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /(s)hout [text]");
-    }
-
-    SetPlayerBubbleText(playerid, 20.0, COLOR_WHITE, "shouts: %s!", params);
-
-    format(string, sizeof(string), "%s shouts: %s!", GetPlayerRPName(playerid), params);
-    SendProximityFadeMessage(playerid, 20.0, string, COLOR_GREY1, COLOR_GREY2, COLOR_GREY3, COLOR_GREY4, COLOR_GREY5);
-    return 1;
-}
-
-CMD:me(playerid, params[])
-{
-    if(isnull(params))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /me [action]");
-    }
-
-    if(strlen(params) > MAX_SPLIT_LENGTH)
-    {
-        SendProximityMessage(playerid, 20.0, COLOR_PURPLE, "** %s %.*s...", GetPlayerRPName(playerid), MAX_SPLIT_LENGTH, params);
-        SendProximityMessage(playerid, 20.0, COLOR_PURPLE, "** ...%s", params[MAX_SPLIT_LENGTH]);
-    }
-    else
-    {
-        SendProximityMessage(playerid, 20.0, COLOR_PURPLE, "** %s %s", GetPlayerRPName(playerid), params);
-    }
-    return 1;
-}
-
-CMD:do(playerid, params[])
-{
-    if(isnull(params))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /do [describe]");
-    }
-
-    if(strlen(params) > MAX_SPLIT_LENGTH)
-    {
-        SendProximityMessage(playerid, 20.0, COLOR_PURPLE, "** %.*s...", MAX_SPLIT_LENGTH, params);
-        SendProximityMessage(playerid, 20.0, COLOR_PURPLE, "** ...%s (( %s ))", params[MAX_SPLIT_LENGTH], GetPlayerRPName(playerid));
-    }
-    else
-    {
-        SendProximityMessage(playerid, 20.0, COLOR_PURPLE, "** %s (( %s ))", params, GetPlayerRPName(playerid));
-    }
-    return 1;
-}
-
-CMD:stats(playerid, params[])
-{
-    DisplayStats(playerid);
-    return 1;
-}
-
-CMD:l(playerid, params[])
-{
-    return cmd_low(playerid, params);
-}
-
-CMD:low(playerid, params[])
-{
-    new
-        string[144];
-
-    if(isnull(params))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /(l)ow [text]");
-    }
-
-    SetPlayerBubbleText(playerid, 5.0, COLOR_WHITE, "[low]: %s", params);
-
-    format(string, sizeof(string), "%s says [low]: %s", GetPlayerRPName(playerid), params);
-    SendProximityFadeMessage(playerid, 5.0, string, COLOR_GREY1, COLOR_GREY2, COLOR_GREY3, COLOR_GREY4, COLOR_GREY5);
-    return 1;
-}
-
-CMD:w(playerid, params[])
-{
-    return cmd_whisper(playerid, params);
-}
-
-CMD:whisper(playerid, params[])
-{
-    new targetid, text[128];
-
-    if(sscanf(params, "us[128]", targetid, text))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /(w)hisper [playerid] [text]");
-    }
-    if(!IsPlayerConnected(targetid))
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "The player specified is disconnected.");
-    }
-    if(!IsPlayerInRangeOfPlayer(playerid, targetid, 5.0) && (!PlayerInfo[playerid][pAdminDuty] && PlayerInfo[playerid][pAdmin] < 6))
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "You must be near that player to whisper them.");
-    }
-    if(targetid == playerid)
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "You can't whisper to yourself.");
-    }
-
-    SendClientMessageEx(targetid, COLOR_YELLOW, "** Whisper from %s: %s **", GetPlayerRPName(playerid), text);
-    SendClientMessageEx(playerid, COLOR_YELLOW, "** Whisper to %s: %s **", GetPlayerRPName(targetid), text);
-    
-    if(PlayerInfo[targetid][pWhisperFrom] == INVALID_PLAYER_ID)
-    {
-        SendClientMessage(targetid, COLOR_WHITE, "** You can use '/rw [message]' to reply to this whisper.");
-    }
-
-    PlayerInfo[targetid][pWhisperFrom] = playerid;
-    return 1;
-}
-
-CMD:rw(playerid, params[])
-{
-    if(isnull(params))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /rw [text]");
-    }
-    if(PlayerInfo[playerid][pWhisperFrom] == INVALID_PLAYER_ID)
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "You haven't been whispered by anyone since you joined the server.");
-    }
-    if(!IsPlayerInRangeOfPlayer(playerid, PlayerInfo[playerid][pWhisperFrom], 5.0) && (!PlayerInfo[playerid][pAdminDuty] && PlayerInfo[playerid][pAdmin] < 6))
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "You must be near that player to whisper them.");
-    }
-    
-    SendClientMessageEx(PlayerInfo[playerid][pWhisperFrom], COLOR_YELLOW, "** Whisper from %s: %s **", GetPlayerRPName(playerid), params);
-    SendClientMessageEx(playerid, COLOR_YELLOW, "** Whisper to %s: %s **", GetPlayerRPName(PlayerInfo[playerid][pWhisperFrom]), params);
-    return 1;
-}
-
 CMD:engine(playerid, params[])
 {
     new vehicleid = GetPlayerVehicleID(playerid), Float:health;
@@ -30999,43 +30798,6 @@ CMD:ooc(playerid, params[])
         }
     }
 
-    return 1;
-}
-
-CMD:newb(playerid, params[])
-{
-    return cmd_newbie(playerid, params);
-}
-
-CMD:n(playerid, params[])
-{
-    return cmd_newbie(playerid, params);
-}
-
-CMD:newbie(playerid, params[])
-{
-    if(isnull(params))
-    {
-        return SendClientMessage(playerid, COLOR_GREY3, "[Usage]: /(n)ewbie [newbie chat]");
-    }
-    if(!enabledNewbie && PlayerInfo[playerid][pAdmin] < 2)
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "The newbie channel is disabled at the moment.");
-    }
-    if(PlayerInfo[playerid][pNewbieMuted])
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "You are muted from speaking in this channel. /report for an unmute.");
-    }
-    if(gettime() - PlayerInfo[playerid][pLastNewbie] < 60)
-    {
-        return SendClientMessageEx(playerid, COLOR_GREY, "You can only speak in this channel every 60 seconds. Please wait %i more seconds.", 60 - (gettime() - PlayerInfo[playerid][pLastNewbie]));
-    }
-    if(PlayerInfo[playerid][pToggleNewbie])
-    {
-        return SendClientMessage(playerid, COLOR_GREY, "You can't speak in the newbie chat as you have it toggled.");
-    }
-
-    SendNewbieChatMessage(playerid, params);
     return 1;
 }
 
@@ -42654,12 +42416,10 @@ CMD:buy(playerid, params[])
 {
     new businessid = GetInsideBusiness(playerid), title[64];
 
-    if(businessid == -1)
-    {
+    if(businessid == -1) {
         return SendClientMessage(playerid, COLOR_GREY, "You are not inside of any business where you can buy stuff.");
     }
-    if(BusinessInfo[businessid][bProducts] <= 0)
-    {
+    if(BusinessInfo[businessid][bProducts] <= 0) {
         return SendClientMessage(playerid, COLOR_GREY, "This business is out of stock.");
     }
 
@@ -42667,28 +42427,22 @@ CMD:buy(playerid, params[])
 
     switch(BusinessInfo[businessid][bType])
     {
-        case BUSINESS_STORE:
-        {
+        case BUSINESS_STORE: {
             ShowPlayerDialog(playerid, DIALOG_BUY, DIALOG_STYLE_LIST, title, "Mobile phone ($525)\nWalkie talkie ($5000)\nCigars ($125)\nSpraycans ($400)\nPhonebook ($125)\nCamera ($200)\nMP3 player ($2400)\nFishing rod ($1000)\nFish bait ($790)\nMuriatic acid ($1500)\nBaking soda ($1290)\nPocket watch ($1000)\nGPS system ($750)\nGasoline can ($500)", "Select", "Cancel");
         }
-        case BUSINESS_GUNSHOP:
-        {
+        case BUSINESS_GUNSHOP: {
             ShowPlayerDialog(playerid, DIALOG_BUY, DIALOG_STYLE_LIST, title, "9mm pistol ($1500)\nShotgun ($2000)\nRifle ($4000)\nLight armor ($1500)", "Select", "Cancel");
         }
-        case BUSINESS_CLOTHES:
-        {
+        case BUSINESS_CLOTHES: {
             ShowPlayerDialog(playerid, DIALOG_BUY, DIALOG_STYLE_LIST, title, "Clothes ($2000)\nGlasses ($500)\nBandanas & masks ($375)\nHats & caps ($240)\nMisc clothing ($500)", "Select", "Cancel");
         }
-        case BUSINESS_GYM:
-        {
+        case BUSINESS_GYM: {
             ShowPlayerDialog(playerid, DIALOG_BUY, DIALOG_STYLE_LIST, title, "Normal (Free)\nBoxing ($4725)\nKung Fu ($7650)\nKneehead ($9275)\nGrabkick ($1250)\nElbow ($2950)", "Select", "Cancel");
         }
-        case BUSINESS_RESTAURANT:
-        {
+        case BUSINESS_RESTAURANT: {
             ShowPlayerDialog(playerid, DIALOG_BUY, DIALOG_STYLE_LIST, title, "Water ($50)\nSprunk ($100)\nFrench fries ($250)\nHamburger ($400)\nCheeseburger ($450)\nMac & cheese ($525)\nClub sandwich ($600)\nFish & chips ($925)\nPan pizza ($1200)", "Select", "Cancel");
         }
-        case BUSINESS_BARCLUB:
-        {
+        case BUSINESS_BARCLUB: {
             ShowPlayerDialog(playerid, DIALOG_BUY, DIALOG_STYLE_LIST, title, "Water ($50)\nSprunk ($100)\nBeer ($200)\nWine ($350)\nWhiskey ($475)", "Select", "Cancel");
         }
     }
