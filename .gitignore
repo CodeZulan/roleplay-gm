@@ -63,3 +63,6 @@ samp.ban
 #
 
 *.sublime-workspace
+mysql_log.txt
+scriptfiles/mysql_error.txt
+scriptfiles/server_info.ini
