@@ -272,6 +272,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
             SendClientMessageEx(strval(inputtext), COLOR_AQUA, "[INFO]: {FFFFFF}Player (%d) %s offers to sell you a %s for $%d", playerid, GetPlayerRPName(playerid), GetSellingWeaponName(PlayerSellingWeapon[playerid]), PlayerSellingWeaponPrice[playerid]);
             SendClientMessage(strval(inputtext), COLOR_AQUA, "[TIP]: {FFFFFF}Type the command /buyweapon to accept the offer (or just ignore to not).");
             PlayerSeller[strval(inputtext)] = playerid;
+            IsPlayerOffered[strval(inputtext)] = true;
 
             SendClientMessageEx(playerid, COLOR_AQUA, "[INFO]: {FFFFFF}You have offered %s a %s for $%d", GetPlayerRPName(strval(inputtext)), GetSellingWeaponName(PlayerSellingWeapon[playerid]), PlayerSellingWeaponPrice[playerid]);
         } else {
