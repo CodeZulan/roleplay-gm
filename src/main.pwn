@@ -9537,7 +9537,7 @@ IsValidName(name[])
 
         switch(name[i])
         {
-            case 'A'..'Z', 'a'..'z', '_', '.', '[', ']', '(', ')', '=', '@':
+            case 'A'..'Z', 'a'..'z', '_':
             {
                 continue;
             }
@@ -21452,6 +21452,11 @@ public OnPlayerUpdate(playerid)
         {
             if(PlayerInfo[playerid][pCurrentWeapon] > 1 && !PlayerHasWeapon(playerid, PlayerInfo[playerid][pCurrentWeapon]) && !PlayerInfo[playerid][pKicked])
             {
+                if(PlayerInfo[playerid][pCurrentWeapon] == WEAPON_SHOTGUN && IsPlayerAndroid[playerid]) {
+                    RemovePlayerWeapon(playerid, WEAPON_SHOTGUN);
+                    return 1;
+                }
+                
                 PlayerInfo[playerid][pACWarns]++;
 
                 if(PlayerInfo[playerid][pACWarns] < MAX_ANTICHEAT_WARNINGS)
@@ -30902,7 +30907,7 @@ CMD:time(playerid, params[])
     }
 
     GameTextForPlayer(playerid, string, 5000, 1);
-    SendClientMessageEx(playerid, COLOR_WHITE, "** Paychecks occur at every hour. The next paycheck is at %02d:00 which is in %i minutes.", date[3], (60 - date[4]));
+    SendClientMessageEx(playerid, COLOR_WHITE, "** Paychecks occur at every hour. The next paycheck is at %02d:00 which is in %i minute%s.", date[3], (60 - date[4]), (60 - date[4]) == 1 ? "" : "s");
     return 1;
 }
 
