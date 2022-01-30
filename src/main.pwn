@@ -6120,7 +6120,7 @@ SetPlayerToSpawn(playerid)
         TogglePlayerSpectating(playerid, 0);
 
         if(IsPlayerAndroid[playerid]) {
-            SendClientMessage(playerid, COLOR_ORANGE, "[WARNING]: {FFFFFF}You are on an android client, expect bugs! We do not recommend continuing...");
+            SendClientMessage(playerid, COLOR_ORANGE, "[WARNING]: {FFFFFF}If you are on an android client, expect bugs! We do not recommend continuing...");
         }
     }
     else
