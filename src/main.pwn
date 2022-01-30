@@ -20,6 +20,8 @@ new
 public OnAndroidCheck(playerid, bool:isDisgustingThiefToBeBanned) {
     if(isDisgustingThiefToBeBanned) {
         IsPlayerAndroid[playerid] = true;
+    } else {
+        IsPlayerAndroid[playerid] = false;
     }
 }
 // ---------------------------------------
@@ -144,8 +146,8 @@ public OnAndroidCheck(playerid, bool:isDisgustingThiefToBeBanned) {
 #define SERVER_REVISION  "v1.0(c)" // Change this every commit.
 #define SERVER_ANTICHEAT "[Anti-Cheat] Zulie"
 
-#define SERVER_MUSIC_URL "music.rockstar-rp.xyz"
-#define SERVER_FETCH_URL "music.rockstar-rp.xyz"
+#define SERVER_MUSIC_URL "music.rockstar-rp.it"
+#define SERVER_FETCH_URL "music.rockstar-rp.it"
 // ---------------------------------------
 #undef SSCANF_Join
 #undef SSCANF_Leave
@@ -257,8 +259,14 @@ enum
     DIALOG_GANGDRUGWITHDRAW,
     DIALOG_FREENAMECHANGE,
     DIALOG_STRAWMAN,
+    DIALOG_STRAWMAN2,
     DIALOG_DRUG_PACKAGES,
-    DIALOG_WEAPON_PACKAGES
+    DIALOG_WEAPON_PACKAGES,
+    DIALOG_WEAPON_PACKAGES2,
+    DIALOG_CHOOSE_WEAPON_TIER,
+    DIALOG_SELL_WEAPON,
+    DIALOG_SELL_WEAPON2,
+    DIALOG_SELL_WEAPON3,
 }
 
 enum
@@ -9529,7 +9537,7 @@ IsValidName(name[])
 
         switch(name[i])
         {
-            case 'A'..'Z', 'a'..'z', '0'..'9', '_', '.', '[', ']', '(', ')', '=', '@':
+            case 'A'..'Z', 'a'..'z', '_', '.', '[', ']', '(', ')', '=', '@':
             {
                 continue;
             }
@@ -9893,7 +9901,7 @@ public TutorialTimer(playerid, stage)
                 mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET setup = 0, gender = %i, age = %i, skin = %i WHERE uid = %i", PlayerInfo[playerid][pGender], PlayerInfo[playerid][pAge], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pID]);
                 mysql_tquery(SQL_Connection, SQL_Buffer);
 
-                SendClientMessage(playerid, COLOR_AQUA, "Welcome to Rockstar-RP. Make sure to visit rockstar-rp.xyz for news and updates.");
+                SendClientMessage(playerid, COLOR_AQUA, "Welcome to Rockstar-RP. Make sure to visit rockstar-rp.it for news and updates.");
                 SendClientMessage(playerid, COLOR_AQUA, "Use the /locate command to point to locations of jobs, businesses, and common places.");
                 
                 //SendClientMessage(playerid, COLOR_AQUA, "The DMV has been marked on your map. Navigate to the marker to begin your drivers test.");
@@ -10983,7 +10991,7 @@ public MinuteTimer()
                 
                 if(ReportInfo[i][rTime] <= 0)
                 {
-                    SendClientMessage(ReportInfo[i][rReporter], COLOR_GREY, "Your report has expired. You can make an admin request on rockstar-rp.xyz if you still need help.");
+                    SendClientMessage(ReportInfo[i][rReporter], COLOR_GREY, "Your report has expired. You can make an admin request on rockstar-rp.it if you still need help.");
                     ReportInfo[i][rExists] = 0;
                 }
             }
@@ -11117,7 +11125,7 @@ public ShowMainMenuCamera(playerid)
         TextDrawShowForPlayer(playerid, LoginScreen[i]);
     }
 
-    PlayAudioStreamForPlayer(playerid, "http://music.rockstar-rp.xyz/blow.mp3"); // josh
+    PlayAudioStreamForPlayer(playerid, "http://music.rockstar-rp.it/blow.mp3"); // josh
     //InterpolateCameraPos(playerid, 2090.500732, -1730.270385, 122.216575, 873.889953, -1519.312011, 123.752815, 60000);
     //InterpolateCameraLookAt(playerid, 2090.014404, -1730.264892, 122.177040, 873.899353, -1518.828613, 123.698936, 60000);
     
@@ -12913,7 +12921,7 @@ public OnQueryFinished(threadid, extraid)
                 if(cache_get_field_content_int(0, "permanent"))
                     SendClientMessageEx(extraid, COLOR_YELLOW, "You are permanently banned from this server.");
                 else
-                    SendClientMessageEx(extraid, COLOR_YELLOW, "You are banned from this server. You can appeal your ban at www.rockstar-rp.xyz.");
+                    SendClientMessageEx(extraid, COLOR_YELLOW, "You are banned from this server. You can appeal your ban at www.rockstar-rp.it.");
 
                 SendClientMessageEx(extraid, COLOR_LIGHTRED, "Admin: %s", bannedby);
                 SendClientMessageEx(extraid, COLOR_LIGHTRED, "Date: %s", date);
@@ -14732,7 +14740,7 @@ public OnGameModeInit()
     TextDrawSetProportional(LoginScreen[3], 1);
 
     // Website textdraw
-    WebsiteTD = TextDrawCreate(501.000000, 6.000000, "www.rockstar-rp.xyz");
+    WebsiteTD = TextDrawCreate(501.000000, 6.000000, "www.rockstar-rp.it");
     TextDrawBackgroundColor(WebsiteTD, 255);
     TextDrawAlignment(WebsiteTD, 1);
     TextDrawFont(WebsiteTD, 0);
@@ -19334,7 +19342,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 20 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 20 ], 0);
 
-    LoginTD[ playerid ][ 21 ] = CreatePlayerTextDraw(playerid,316.000000, 343.000000, "~w~Website~r~- www.rockstar-rp.xyz");
+    LoginTD[ playerid ][ 21 ] = CreatePlayerTextDraw(playerid,316.000000, 343.000000, "~w~Website~r~- www.rockstar-rp.it");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 21 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 21 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 21 ], 2);
@@ -19345,7 +19353,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 21 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 21 ], 0);
 
-    LoginTD[ playerid ][ 22 ] = CreatePlayerTextDraw(playerid,316.000000, 353.000000, "~w~Teamspeak:~r~- ts.rockstar-rp.xyz");
+    LoginTD[ playerid ][ 22 ] = CreatePlayerTextDraw(playerid,316.000000, 353.000000, "~w~Teamspeak:~r~- ts.rockstar-rp.it");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 22 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 22 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 22 ], 2);
@@ -19389,7 +19397,7 @@ stock createme(playerid)
     PlayerTextDrawSetShadow(playerid,LoginTD[ playerid ][ 25 ], 1);
     PlayerTextDrawSetSelectable(playerid,LoginTD[ playerid ][ 25 ], 0);
 
-    LoginTD[ playerid ][ 26 ] = CreatePlayerTextDraw(playerid,316.000000, 433.000000, "				rockstar-rp.xyz					");
+    LoginTD[ playerid ][ 26 ] = CreatePlayerTextDraw(playerid,316.000000, 433.000000, "				rockstar-rp.it					");
     PlayerTextDrawAlignment(playerid,LoginTD[ playerid ][ 26 ], 2);
     PlayerTextDrawBackgroundColor(playerid,LoginTD[ playerid ][ 26 ], 255);
     PlayerTextDrawFont(playerid,LoginTD[ playerid ][ 26 ], 2);
@@ -31944,7 +31952,7 @@ CMD:adminhelp(playerid, params[])
     }
     if(PlayerInfo[playerid][pAdmin] >= 4)
     {
-        SendClientMessage(playerid, COLOR_YELLOW, "Senior Admin:{FFFFFF} /givegun, /setname, /permaban, /oban, /unban, /unbanip, /banip, /lockaccount, /unlockaccount.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Senior Admin:{FFFFFF} /setname, /permaban, /oban, /unban, /unbanip, /banip, /lockaccount, /unlockaccount.");
         SendClientMessage(playerid, COLOR_YELLOW, "Senior Admin:{FFFFFF} /explode, /event, /gplay, /gplayurl, /gstop, /sethpall, /setarmorall, /setweather, /settime, /addtoevent.");
     }
     if(PlayerInfo[playerid][pAdmin] >= 5)
@@ -31960,7 +31968,7 @@ CMD:adminhelp(playerid, params[])
     }
     if(PlayerInfo[playerid][pAdmin] >= 7)
     {
-        SendClientMessage(playerid, COLOR_VIP, "Management:{FFFFFF} /doublexp /deleteaccount /forcepayday /setstat /gmx /anticheat");
+        SendClientMessage(playerid, COLOR_VIP, "Management:{FFFFFF} /givegun /doublexp /deleteaccount /forcepayday /setstat /gmx /anticheat");
     }
     if(PlayerInfo[playerid][pFactionMod])
     {
@@ -32164,7 +32172,7 @@ CMD:nro(playerid, params[])
 
     SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has trashed report %i from %s as their report involves a non-rulebreaking offense.", GetPlayerRPName(playerid), reportid, GetPlayerRPName(ReportInfo[reportid][rReporter]));
     SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "%s has trashed your report as it involves a non-rulebreaking offense", GetPlayerRPName(playerid));
-    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our rules page at rockstar-rp.xyz for a full list of rulebreaking offenses.");
+    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our rules page at rockstar-rp.it for a full list of rulebreaking offenses.");
     ReportInfo[reportid][rExists] = 0;
     return 1;
 }
@@ -32252,7 +32260,7 @@ CMD:post(playerid, params[])
 
     SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has trashed report %i from %s as it needs to be handled on the forums.", GetPlayerRPName(playerid), reportid, GetPlayerRPName(ReportInfo[reportid][rReporter]));
     SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "%s has trashed your report as your issue at hand must be handled on our forums.", GetPlayerRPName(playerid));
-    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our website at rockstar-rp.xyz in order to to resolve this issue.");
+    SendClientMessageEx(ReportInfo[reportid][rReporter], COLOR_LIGHTRED, "Please visit our website at rockstar-rp.it in order to to resolve this issue.");
     ReportInfo[reportid][rExists] = 0;
     return 1;
 }
@@ -35919,8 +35927,8 @@ CMD:explode(playerid, params[])
 
     GetPlayerPos(targetid, x, y, z);
 
-    CreateExplosionForPlayer(targetid, x, y, z, 6, 20.0);
-    SendClientMessageEx(playerid, COLOR_WHITE, "** You exploded %s for their client only.", GetPlayerRPName(targetid));
+    CreateExplosion(x, y, z, 6, 10.0);
+    SendClientMessageEx(playerid, COLOR_WHITE, "** You exploded %s.", GetPlayerRPName(targetid));
     return 1;
 }
 
@@ -54671,7 +54679,7 @@ CMD:fixvw(playerid, params[])
         return SendClientMessage(playerid, COLOR_GREY, "You can't use this command at the moment.");
     }
 
-    if(GetPlayerVirtualWorld(playerid) > 0 && GetPlayerInterior(playerid) == 0)
+    if(GetPlayerVirtualWorld(playerid) > 0 && GetPlayerInterior(playerid) == 0 && PlayerInfo[playerid][pJailTime] == 0)
     {
         SetPlayerVirtualWorld(playerid, 0);
         SendClientMessage(playerid, COLOR_GREY, "Your virtual world has been fixed.");
@@ -54826,8 +54834,8 @@ CMD:info(playerid, params[])
 CMD:information(playerid, params[])
 {
     SendClientMessage(playerid, COLOR_GREEN, "|____ Server Information ____|");
-    SendClientMessage(playerid, COLOR_GREY2, "Website: www.rockstar-rp.xyz | Store: www.rockstar-rp.xyz/store");
-    SendClientMessage(playerid, COLOR_GREY2, "Teamspeak: ts.rockstar-rp.xyz");
+    SendClientMessage(playerid, COLOR_GREY2, "Website: www.rockstar-rp.it | Store: www.rockstar-rp.it/store");
+    SendClientMessage(playerid, COLOR_GREY2, "Teamspeak: ts.rockstar-rp.it");
     SendClientMessage(playerid, COLOR_GREY2, "Developer: Jimmy Esto | Kervin Yap | Janpatrick Bejare");
     SendClientMessage(playerid, COLOR_GREY2, "Server Owner: Kirigaya Kazuto");
     return 1;
