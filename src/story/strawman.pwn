@@ -163,10 +163,10 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                         return 1;
                     }
 
-                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack1 = weaponpack1 + %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pID]);
-                    mysql_tquery(SQL_Connection, SQL_Buffer);
-
                     PlayerInfo[playerid][pCash] -= strval(WEAPON_PACKAGE_1_PRICE) * strval(inputtext);
+
+                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack1 = weaponpack1 + %d, cash = %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pCash], PlayerInfo[playerid][pID]);
+                    mysql_tquery(SQL_Connection, SQL_Buffer);
                 }
                 case 1: {
                     if(PlayerInfo[playerid][pCash] < strval(WEAPON_PACKAGE_2_PRICE) * strval(inputtext)) {
@@ -174,10 +174,10 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                         return 1;
                     }
 
-                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack2 = weaponpack2 + %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pID]);
-                    mysql_tquery(SQL_Connection, SQL_Buffer);
-
                     PlayerInfo[playerid][pCash] -= strval(WEAPON_PACKAGE_2_PRICE) * strval(inputtext);
+
+                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack2 = weaponpack2 + %d, cash = %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pCash], PlayerInfo[playerid][pID]);
+                    mysql_tquery(SQL_Connection, SQL_Buffer);
                 }
                 case 2: {
                     if(PlayerInfo[playerid][pCash] < strval(WEAPON_PACKAGE_3_PRICE) * strval(inputtext)) {
@@ -185,10 +185,10 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                         return 1;
                     }
 
-                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack3 = weaponpack3 + %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pID]);
-                    mysql_tquery(SQL_Connection, SQL_Buffer);
-
                     PlayerInfo[playerid][pCash] -= strval(WEAPON_PACKAGE_3_PRICE) * strval(inputtext);
+
+                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack3 = weaponpack3 + %d, cash = %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pCash], PlayerInfo[playerid][pID]);
+                    mysql_tquery(SQL_Connection, SQL_Buffer);
                 }
                 case 3: {
                     if(PlayerInfo[playerid][pCash] < strval(WEAPON_PACKAGE_4_PRICE) * strval(inputtext)) {
@@ -196,10 +196,10 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                         return 1;
                     }
 
-                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack4 = weaponpack4 + %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pID]);
-                    mysql_tquery(SQL_Connection, SQL_Buffer);
-
                     PlayerInfo[playerid][pCash] -= strval(WEAPON_PACKAGE_4_PRICE) * strval(inputtext);
+
+                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack4 = weaponpack4 + %d, cash = %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pCash], PlayerInfo[playerid][pID]);
+                    mysql_tquery(SQL_Connection, SQL_Buffer);
                 }
                 case 4: {
                     if(PlayerInfo[playerid][pCash] < strval(WEAPON_PACKAGE_5_PRICE) * strval(inputtext)) {
@@ -207,10 +207,10 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                         return 1;
                     }
 
-                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack5 = weaponpack5 + %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pID]);
-                    mysql_tquery(SQL_Connection, SQL_Buffer);
-
                     PlayerInfo[playerid][pCash] -= strval(WEAPON_PACKAGE_5_PRICE) * strval(inputtext);
+
+                    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET weaponpack5 = weaponpack5 + %d, cash = %d WHERE uid = %d", strval(inputtext), PlayerInfo[playerid][pCash], PlayerInfo[playerid][pID]);
+                    mysql_tquery(SQL_Connection, SQL_Buffer);
                 }
             }
 
@@ -388,6 +388,30 @@ public OnPlayerOpenWeaponPackage2(playerid, packagetype) {
 
                 SendClientMessage(playerid, COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}You have unpacked your tier 1 package!");
             }
+            case 2: {
+                mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET wpack_shotgun = wpack_shotgun + 5, wpack_sawnoff = wpack_sawnoff + 5 WHERE uid = %d", PlayerInfo[playerid][pID]);
+                mysql_tquery(SQL_Connection, SQL_Buffer);
+
+                SendClientMessage(playerid, COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}You have unpacked your tier 2 package!");
+            }
+            case 3: {
+                mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET wpack_tec9 = wpack_tec9 + 5, wpack_uzi = wpack_uzi + 5 WHERE uid = %d", PlayerInfo[playerid][pID]);
+                mysql_tquery(SQL_Connection, SQL_Buffer);
+
+                SendClientMessage(playerid, COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}You have unpacked your tier 3 package!");
+            }
+            case 4: {
+                mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET wpack_mp5= wpack_mp5 + 10, wpack_ak47 = wpack_ak47 + 5, wpack_rifle = wpack_rifle + 10 WHERE uid = %d", PlayerInfo[playerid][pID]);
+                mysql_tquery(SQL_Connection, SQL_Buffer);
+
+                SendClientMessage(playerid, COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}You have unpacked your tier 4 package!");
+            }
+            case 5: {
+                mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET wpack_sniper = wpack_sniper + 1, wpack_m4 = wpack_m4 + 10, wpack_spas = wpack_spas + 10 WHERE uid = %d", PlayerInfo[playerid][pID]);
+                mysql_tquery(SQL_Connection, SQL_Buffer);
+
+                SendClientMessage(playerid, COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}You have unpacked your tier 5 package!");
+            }
         }
     } else {
         SendClientMessage(playerid, COLOR_RED, "[ERROR]: {FFFFFF}You do not have any weapon packages of that tier!");
@@ -429,6 +453,11 @@ CMD:buyweapon(playerid, params[]) {
         return 1;
     }
 
+    if(PlayerInfo[playerid][pLevel] < 3) {
+        SendClientMessage(playerid, COLOR_RED, "[ERROR]: {FFFFFF}You can not buy a gun unless you're level 3 or above!");
+        return 1;
+    }
+
     if(!IsPlayerInRangeOfPlayer(playerid, PlayerSeller[playerid], 5.0)) {
         SendClientMessage(playerid, COLOR_RED, "[ERROR]: {FFFFFF}The seller is out of range or disconnected!");
         return 1;
@@ -441,6 +470,11 @@ CMD:buyweapon(playerid, params[]) {
 
     PlayerInfo[playerid][pCash] -= PlayerSellingWeaponPrice[PlayerSeller[playerid]];
     PlayerInfo[PlayerSeller[playerid]][pCash] += PlayerSellingWeaponPrice[PlayerSeller[playerid]];
+
+    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET cash = %d WHERE uid = %d", PlayerInfo[playerid][pCash], PlayerInfo[playerid][pID]);
+    mysql_tquery(SQL_Connection, SQL_Buffer);
+    mysql_format(SQL_Connection, SQL_Buffer, sizeof(SQL_Buffer), "UPDATE users SET cash = %d WHERE uid = %d", PlayerInfo[PlayerSeller[playerid]][pCash], PlayerInfo[PlayerSeller[playerid]][pID]);
+    mysql_tquery(SQL_Connection, SQL_Buffer);
 
     switch(PlayerSellingWeapon[PlayerSeller[playerid]]) {
         case 0: GivePlayerWeaponEx(playerid, WEAPON_SILENCED);
@@ -458,7 +492,9 @@ CMD:buyweapon(playerid, params[]) {
     }
 
     SendClientMessageEx(playerid, COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}You have bought %s's weapon for $%d!", GetPlayerRPName(PlayerSeller[playerid]), PlayerSellingWeaponPrice[PlayerSeller[playerid]]);
-    SendClientMessageEx(playerid, COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}%s bought your weapon for $%d!", GetPlayerRPName(playerid), PlayerSellingWeaponPrice[PlayerSeller[playerid]]);
+    SendClientMessageEx(PlayerSeller[playerid], COLOR_LIGHTGREEN, "[SUCCESS]: {FFFFFF}%s bought your weapon for $%d!", GetPlayerRPName(playerid), PlayerSellingWeaponPrice[PlayerSeller[playerid]]);
+
+    // SendProximityMessage(playerid, 20.0, COLOR_PURPLE, "** %s and %s traded ", GetPlayerRPName(playerid), params);
 
     IsPlayerOffered[playerid] = false;
     return 1;
